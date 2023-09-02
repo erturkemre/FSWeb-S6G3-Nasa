@@ -1,8 +1,8 @@
 import React from "react";
 
 const Img = (props) => {
-  const { url } = props;
-  return <image src={url} />;
+  const { hdurl } = props;
+  return <img src={hdurl} />;
 };
 
 export default Img;

@@ -3,6 +3,8 @@ import "./App.css";
 import axios from "axios";
 import ApodData from "./component/ApodData";
 import Header from "./component/Header";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [apodData, setApodData] = useState(null);
@@ -14,12 +16,18 @@ function App() {
   };
 
   useEffect(() => {
+    let startDate = date;
+    let realDate = new Date(date);
+    realDate.setDate(realDate.getDate()+ 3);
+    let endDate = realDate.toISOString().slice(0,10);
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${date}`)
+      .get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${startDate}&end_date${endDate}`)
       .then((res) => {
         setApodData(res.data);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        return err;
+      });
   }, [date]);
 
   return (
